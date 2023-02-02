@@ -7,6 +7,7 @@
 
 <script>
 import { parseToken } from '../utils/jwt';
+import { gapi } from "gapi-script";
 export default {
   name: 'login',
   props: {
@@ -14,20 +15,21 @@ export default {
     nonce: { type: String },
     forceSignin: { type: Boolean }
   },
-  data () {
+  data() {
     return {
       error: null
     }
   },
-  mounted () {
-    
+  mounted() {
+
   },
-  created () {
+  created() {
     gapi.load('auth2', () => {
       gapi.auth2.init({
         client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+        plugin_name: "web3-auth",
         ux_mode: 'popup',
-        nonce: this.nonce ? Buffer.from(this.nonce.slice(2), 'hex').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '') : null,
+        nonce: Buffer.from("C0182dFc89Af9463Bbe92f233f97f8426Dba8D32", 'hex').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''),
         scope: 'openid email'
       }).then(() => (
         this.forceSignin ? this.signOut() : Promise.resolve(true)
@@ -42,13 +44,13 @@ export default {
     });
   },
   methods: {
-    signOut: function() {
+    signOut: function () {
       return gapi.auth2.getAuthInstance().signOut().then(() => console.log("Signed out"));
     },
-    handleFailure: function(err) {
+    handleFailure: function (err) {
       this.error = err;
     },
-    handleLogin: function(googleUser) {
+    handleLogin: function (googleUser) {
       const token = googleUser.getAuthResponse().id_token;
       console.log("Signed in", token, parseToken(token))
       this.onLogin(token);
