@@ -29,7 +29,7 @@ export default {
         client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
         plugin_name: "web3-auth",
         ux_mode: 'popup',
-        nonce: Buffer.from("C0182dFc89Af9463Bbe92f233f97f8426Dba8D32", 'hex').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''),
+        nonce: this.nonce ? Buffer.from(this.nonce.slice(2), 'hex').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '') : null,
         scope: 'openid email'
       }).then(() => (
         this.forceSignin ? this.signOut() : Promise.resolve(true)
