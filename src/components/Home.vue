@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <h1>Google recovery for identity contracts</h1>
+    <h1>Google Sign in and Transaction Signing</h1>
     <h2>
-      <a href="/signup">Create a new identity</a>
+      <a href="/signup">Create a new smart contract wallet</a>
       |
-      <a href="/recover">Recover an identity</a>
+      <a href="/sign">Sign a transaction</a>
     </h2>
     <div v-bind="error"></div>
   </div>

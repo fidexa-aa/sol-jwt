@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Create a new identity with Google recovery</h1>
+    <h1>Create a new wallet with Google</h1>
     <YourAddress :address="address" />
     <GoogleLogin :on-login="handleLogin" />
     <CreateIdentity v-if="this.address && this.token" :address="address" :token="token" />
