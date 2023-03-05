@@ -25,7 +25,7 @@ import { parseToken } from '../utils/jwt.js';
 import { Identity } from '../utils/contracts.js';
 
 export default {
-  name: 'create-wallet,
+  name: 'create-wallet',
   props: {
     token: { type: String },
     address: { type: String }
