@@ -2,11 +2,11 @@
   <div>
     <p>
       <button v-on:click="create" v-bind:disabled="this.creating">
-        {{ this.creating ? 'Creating...' : 'Create an identity contract' }}
+        {{ this.creating ? 'Creating...' : 'Create a wallet using Google Auth' }}
       </button>
     </p>
     <p v-if="this.identity">
-      <span>Identity contract created at</span>
+      <span>Smart contract wallet created at</span>
       <br/>
       <span>{{ this.identity.options.address }}</span>
     </p>
@@ -14,7 +14,7 @@
       <b>Save this address!</b>
     </p>
     <p v-if="this.identity">
-      Now try switching to a different address in Metamask, and heading over to the <a href="/recover">recovery</a> page, to see if you can regain access to your identity contract...
+      Now try switching to a different address in Metamask, and heading over to the <a href="/sign">sign</a> page, to see if you can sign a transaction using the same JWT token!
     </p>
   </div>
 </template>
@@ -25,7 +25,7 @@ import { parseToken } from '../utils/jwt.js';
 import { Identity } from '../utils/contracts.js';
 
 export default {
-  name: 'create-identity',
+  name: 'create-wallet',
   props: {
     token: { type: String },
     address: { type: String }

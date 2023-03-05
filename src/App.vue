@@ -20,7 +20,7 @@
 <script>
 import Home from './components/Home.vue'
 import SignUp from './components/SignUp.vue'
-import Recover from './components/Recover.vue'
+import Recover from './components/Sign.vue'
 import Web3 from 'web3';
 
 export default {

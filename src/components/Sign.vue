@@ -1,22 +1,16 @@
 <template>
   <div id="recover">
-    <h1>Identity recovery via Google Sign-in</h1>
+    <h1>Transaction signing via Google Sign-in</h1>
     <YourAddress :address="address" />
     <p>
-      <label>Identity contract address</label>
+      <label>Smart contract address</label>
       <br/>
       <input type="text" v-model="identityAddress" v-on:change="this.updateOwners" />
     </p>
     <div v-if="validAddresses">
-      <p v-if="!!owners">
-        Owners of the identity contract: {{ this.owners.join(', ') }}
-      </p>
-      <p v-if="owned">
-        Your address currently <b>controls the identity contract</b>. Try changing to a different metamask account and refresh the page, and then use google sign in to regain access.
-      </p>
-      <div v-else-if="this.owned === false">
+      <div>
         <p>
-          Your address does not control the identity contract.
+          Sign a transaction to test the google authentication flow:
         </p>
         <GoogleLogin :nonce="this.address" :onLogin="this.recover" :forceSignin="true" />
       </div>
@@ -90,7 +84,7 @@ export default {
       this.recovering = true;
       const { header, payload, signature } = tokenForRecovery(token);
       console.log('Token:', parseToken(token));
-      console.log('Recovering identity:', header, payload, signature);
+      console.log('Signing transaction:', header, payload, signature);
       await Identity(this.identityAddress).methods
         .recover(header.toString(), payload.toString(), signature)
         .send({ from: this.address, gas: 6e6 });
